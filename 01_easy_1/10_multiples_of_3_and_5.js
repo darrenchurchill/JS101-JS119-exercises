@@ -11,16 +11,22 @@
  *
  */
 
+function isMultiple(num, divisor) {
+  return num % divisor === 0;
+}
+
+function hasMultiple(num, divisors) {
+  for (const divisor of divisors) {
+    if (isMultiple(num, divisor)) return true;
+  }
+  return false;
+}
+
 function multisum(num) {
   let result = 0;
   let MULTIPLES = [3, 5];
   for (let i = 1; i <= num; i++) {
-    for (let multiple of MULTIPLES) {
-      if (i % multiple === 0) {
-        result += i;
-        break;
-      }
-    }
+    if (hasMultiple(i, MULTIPLES)) result += i;
   }
   return result;
 }
