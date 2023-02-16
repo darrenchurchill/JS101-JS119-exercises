@@ -11,11 +11,11 @@
  *
  */
 
-function wrapInBox(text, maxWidth = null) {
+function wrapInBox(text, maxBannerWidth = null) {
   const PADDING_TEXT = '| ';
-  const WIDTH = maxWidth === null ?
+  const WIDTH = maxBannerWidth === null ?
     text.length + (PADDING_TEXT.length * 2) :
-    Math.max(maxWidth, PADDING_TEXT.length * 2);
+    Math.max(maxBannerWidth, PADDING_TEXT.length * 2);
 
   text = genTruncatedText(text, PADDING_TEXT, WIDTH);
 
@@ -26,12 +26,14 @@ function wrapInBox(text, maxWidth = null) {
        + `${genTopBottom(WIDTH)}`;
 }
 
-function genTruncatedText(text, paddingText = '| ', maxWidth) {
+function genTruncatedText(text, paddingText = '| ', maxBannerWidth) {
   const ELLIPSIS = '...';
-  if (text.length <= maxWidth - (paddingText.length * 2)) return text;
-  if (ELLIPSIS.length + 1 < maxWidth - (paddingText.length * 2)) {
-    return text.slice(0, maxWidth - (paddingText.length * 2) - ELLIPSIS.length)
-         + ELLIPSIS;
+  if (text.length <= maxBannerWidth - (paddingText.length * 2)) return text;
+  if (ELLIPSIS.length + 1 < maxBannerWidth - (paddingText.length * 2)) {
+    return text.slice(
+      0,
+      maxBannerWidth - (paddingText.length * 2) - ELLIPSIS.length
+    ) + ELLIPSIS;
   }
   return '';
 }
@@ -48,8 +50,8 @@ function genTopBottom(width, paddingText = '+') {
   return genLine('-'.repeat(width - (paddingText.length * 2)), paddingText);
 }
 
-function logInBox(text, maxWidth = null) {
-  console.log(wrapInBox(text, maxWidth));
+function logInBox(text, maxBannerWidth = null) {
+  console.log(wrapInBox(text, maxBannerWidth));
 }
 
 logInBox('To boldly go where no one has gone before.');
