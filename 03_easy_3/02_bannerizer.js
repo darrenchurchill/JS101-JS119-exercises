@@ -13,6 +13,7 @@
 
 function wrapInBox(text, maxBannerWidth = null, handleLongText = 'trunc') {
   const PADDING_TEXT = '| ';
+  // TODO: reduce banner width if wrapped lines are all short enough to do so.
   const BANNER_WIDTH = maxBannerWidth === null ?
     text.length + (PADDING_TEXT.length * 2) :
     Math.max(maxBannerWidth, PADDING_TEXT.length * 2);
@@ -35,20 +36,28 @@ function wrapInBox(text, maxBannerWidth = null, handleLongText = 'trunc') {
        + `${genTopBottom(BANNER_WIDTH)}`;
 }
 
+// eslint-disable-next-line max-lines-per-function
 function genWrappedLines(text, maxTextWidth) {
-  let result = [text.slice(0, maxTextWidth)];
+  let result = [];
+  let words = text.split(' ');
+  let curLine = '';
 
-  for (let i = maxTextWidth; i <= text.length; i += maxTextWidth) {
-    // TODO: break lines at whole words instead of in random places.
-    result.push(text.slice(i, i + maxTextWidth));
+  for (let word of words) {
+    if (curLine.length !== 0) {
+      if (curLine.length + 1 + word.length < maxTextWidth) {
+        curLine += ` ${word}`;
+      } else {
+        result.push(curLine.padEnd(maxTextWidth, ' '));
+        curLine = '';
+      }
+    }
+    if (curLine.length === 0) {
+      if (word.length < maxTextWidth) curLine += word;
+      else return [' '.repeat(maxTextWidth)]; // wrapping fails if any word is too long for a line
+    }
   }
 
-  if (result[result.length - 1].length < maxTextWidth) {
-    result[result.length - 1] = result[result.length - 1].padEnd(
-      maxTextWidth,
-      ' '
-    );
-  }
+  if (curLine.length > 0) result.push(curLine.padEnd(maxTextWidth, ' '));
 
   return result;
 }
@@ -80,7 +89,9 @@ function logInBox(text, maxBannerWidth = null, handleLongText = 'trunc') {
 
 logInBox('To boldly go where no one has gone before.');
 logInBox('To boldly go where no one has gone before.', 40);
-logInBox('To boldly go where no one has gone before.', 40, 'wrap');
+logInBox('To boldly go where no one has gone before.', 20, 'wrap');
+logInBox('To boldly go where no one has gone before.', 10, 'wrap');
+logInBox('To boldly go where no one has gone before.', 3, 'wrap');
 logInBox('To boldly go where no one has gone before.', 4);
 logInBox('To boldly go where no one has gone before.', 3);
 logInBox('');
