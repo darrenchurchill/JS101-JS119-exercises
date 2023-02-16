@@ -15,20 +15,19 @@ function wrapInBox(text) {
   const PADDING_TEXT = '| ';
   const WIDTH = text.length + (PADDING_TEXT.length * 2);
 
-  return genHeaderFooter(WIDTH) + '\n'
+  return genTopBottom(WIDTH) + '\n'
          + genLine(' '.repeat(text.length), PADDING_TEXT) + '\n'
          + genLine(text, PADDING_TEXT) + '\n'
          + genLine(' '.repeat(text.length), PADDING_TEXT) + '\n'
-         + genHeaderFooter(WIDTH);
+         + genTopBottom(WIDTH);
 }
 
 function genLine(bodyText, paddingText) {
   return `${paddingText}${bodyText}${paddingText.split('').reverse().join('')}`;
 }
 
-function genHeaderFooter(width) {
-  const PADDING_TEXT = '+-';
-  return genLine('-'.repeat(width - (PADDING_TEXT.length * 2)), PADDING_TEXT);
+function genTopBottom(width, paddingText = '+') {
+  return genLine('-'.repeat(width - (paddingText.length * 2)), paddingText);
 }
 
 function logInBox(text) {
