@@ -11,29 +11,31 @@
  *
  */
 
+// eslint-disable-next-line max-lines-per-function
 function wrapInBox(text, maxBannerWidth = null, handleLongText = 'trunc') {
   const PADDING_TEXT = '| ';
-  // TODO: reduce banner width if wrapped lines are all short enough to do so.
-  const BANNER_WIDTH = maxBannerWidth === null ?
+  let bannerWidth = maxBannerWidth === null ?
     text.length + (PADDING_TEXT.length * 2) :
     Math.max(maxBannerWidth, PADDING_TEXT.length * 2);
+  let maxTextWidth = bannerWidth - (PADDING_TEXT.length * 2);
 
   let lines = [];
 
   if (handleLongText === 'trunc') {
-    lines = [genTruncatedText(text, BANNER_WIDTH - (PADDING_TEXT.length * 2))];
+    lines = [genTruncatedText(text, maxTextWidth)];
   } else if (handleLongText === 'wrap') {
-    lines = genWrappedLines(text, BANNER_WIDTH - (PADDING_TEXT.length * 2));
+    lines = genWrappedLines(text, maxTextWidth);
+    maxTextWidth = Math.max(...lines.map((line) => line.length));
+    bannerWidth = maxTextWidth + (PADDING_TEXT.length * 2);
   }
 
-  return `${genTopBottom(BANNER_WIDTH)}\n`
-       + `${genEmptyLine(BANNER_WIDTH, PADDING_TEXT)}\n`
-       + lines.reduce(
-           (accum, line) => accum + genLine(line, PADDING_TEXT) + '\n',
-           ''
-         )
-       + `${genEmptyLine(BANNER_WIDTH, PADDING_TEXT)}\n`
-       + `${genTopBottom(BANNER_WIDTH)}`;
+  return `${genTopBottom(bannerWidth)}\n`
+       + `${genEmptyLine(bannerWidth, PADDING_TEXT)}\n`
+       + lines.reduce((accum, line) => {
+           return accum + genLine(line, PADDING_TEXT, maxTextWidth) + '\n';
+         }, '')
+       + `${genEmptyLine(bannerWidth, PADDING_TEXT)}\n`
+       + `${genTopBottom(bannerWidth)}`;
 }
 
 // eslint-disable-next-line max-lines-per-function
@@ -47,17 +49,17 @@ function genWrappedLines(text, maxTextWidth) {
       if (curLine.length + 1 + word.length < maxTextWidth) {
         curLine += ` ${word}`;
       } else {
-        result.push(curLine.padEnd(maxTextWidth, ' '));
+        result.push(curLine);
         curLine = '';
       }
     }
     if (curLine.length === 0) {
       if (word.length < maxTextWidth) curLine += word;
-      else return [' '.repeat(maxTextWidth)]; // wrapping fails if any word is too long for a line
+      else return ['']; // wrapping fails if any word is too long for a line
     }
   }
 
-  if (curLine.length > 0) result.push(curLine.padEnd(maxTextWidth, ' '));
+  if (curLine.length > 0) result.push(curLine);
 
   return result;
 }
@@ -71,8 +73,8 @@ function genTruncatedText(text, maxTextWidth) {
   return '';
 }
 
-function genLine(bodyText, paddingText) {
-  return `${paddingText}${bodyText}${paddingText.split('').reverse().join('')}`;
+function genLine(bodyText, paddingText, textWidth = bodyText.length) {
+  return `${paddingText}${bodyText.padEnd(textWidth, ' ')}${paddingText.split('').reverse().join('')}`;
 }
 
 function genEmptyLine(bannerWidth, paddingText = '| ') {
