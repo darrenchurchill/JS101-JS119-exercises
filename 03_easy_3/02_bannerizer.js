@@ -13,17 +13,17 @@
 
 function wrapInBox(text, maxBannerWidth = null) {
   const PADDING_TEXT = '| ';
-  const WIDTH = maxBannerWidth === null ?
+  const BANNER_WIDTH = maxBannerWidth === null ?
     text.length + (PADDING_TEXT.length * 2) :
     Math.max(maxBannerWidth, PADDING_TEXT.length * 2);
 
-  text = genTruncatedText(text, PADDING_TEXT, WIDTH);
+  text = genTruncatedText(text, PADDING_TEXT, BANNER_WIDTH);
 
-  return `${genTopBottom(WIDTH)}\n`
-       + `${genEmptyLine(WIDTH, PADDING_TEXT)}\n`
+  return `${genTopBottom(BANNER_WIDTH)}\n`
+       + `${genEmptyLine(BANNER_WIDTH, PADDING_TEXT)}\n`
        + `${genLine(text, PADDING_TEXT)}\n`
-       + `${genEmptyLine(WIDTH, PADDING_TEXT)}\n`
-       + `${genTopBottom(WIDTH)}`;
+       + `${genEmptyLine(BANNER_WIDTH, PADDING_TEXT)}\n`
+       + `${genTopBottom(BANNER_WIDTH)}`;
 }
 
 function genTruncatedText(text, paddingText = '| ', maxBannerWidth) {
