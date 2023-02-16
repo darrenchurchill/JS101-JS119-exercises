@@ -16,14 +16,18 @@ function wrapInBox(text) {
   const WIDTH = text.length + (PADDING_TEXT.length * 2);
 
   return genTopBottom(WIDTH) + '\n'
-         + genLine(' '.repeat(text.length), PADDING_TEXT) + '\n'
+         + genEmptyLine(WIDTH, PADDING_TEXT) + '\n'
          + genLine(text, PADDING_TEXT) + '\n'
-         + genLine(' '.repeat(text.length), PADDING_TEXT) + '\n'
+         + genEmptyLine(WIDTH, PADDING_TEXT) + '\n'
          + genTopBottom(WIDTH);
 }
 
 function genLine(bodyText, paddingText) {
   return `${paddingText}${bodyText}${paddingText.split('').reverse().join('')}`;
+}
+
+function genEmptyLine(width, paddingText = '| ') {
+  return genLine(' '.repeat(width - (paddingText.length * 2)), paddingText);
 }
 
 function genTopBottom(width, paddingText = '+') {
