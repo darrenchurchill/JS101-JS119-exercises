@@ -12,12 +12,7 @@
  */
 
 function stringy(length) {
-  let result = '';
-  for (let i = 0; i < length; i++) {
-    if (i % 2 === 0) result += '1';
-    else result += '0';
-  }
-  return result;
+  return ''.padEnd(length, '10');
 }
 
 console.log(stringy(6) === "101010");
