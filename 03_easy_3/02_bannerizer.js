@@ -19,11 +19,11 @@ function wrapInBox(text, maxWidth = null) {
 
   text = genTruncatedText(text, PADDING_TEXT, WIDTH);
 
-  return genTopBottom(WIDTH) + '\n'
-         + genEmptyLine(WIDTH, PADDING_TEXT) + '\n'
-         + genLine(text, PADDING_TEXT) + '\n'
-         + genEmptyLine(WIDTH, PADDING_TEXT) + '\n'
-         + genTopBottom(WIDTH);
+  return `${genTopBottom(WIDTH)}\n`
+       + `${genEmptyLine(WIDTH, PADDING_TEXT)}\n`
+       + `${genLine(text, PADDING_TEXT)}\n`
+       + `${genEmptyLine(WIDTH, PADDING_TEXT)}\n`
+       + `${genTopBottom(WIDTH)}`;
 }
 
 function genTruncatedText(text, paddingText = '| ', maxWidth) {
