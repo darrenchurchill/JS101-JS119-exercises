@@ -42,12 +42,12 @@ function genLine(bodyText, paddingText) {
   return `${paddingText}${bodyText}${paddingText.split('').reverse().join('')}`;
 }
 
-function genEmptyLine(width, paddingText = '| ') {
-  return genLine(' '.repeat(width - (paddingText.length * 2)), paddingText);
+function genEmptyLine(bannerWidth, paddingText = '| ') {
+  return genLine(' '.repeat(bannerWidth - (paddingText.length * 2)), paddingText);
 }
 
-function genTopBottom(width, paddingText = '+') {
-  return genLine('-'.repeat(width - (paddingText.length * 2)), paddingText);
+function genTopBottom(bannerWidth, paddingText = '+') {
+  return genLine('-'.repeat(bannerWidth - (paddingText.length * 2)), paddingText);
 }
 
 function logInBox(text, maxBannerWidth = null) {
