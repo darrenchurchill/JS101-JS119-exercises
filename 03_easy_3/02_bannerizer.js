@@ -20,7 +20,7 @@ function wrapInBox(text, maxBannerWidth = null, handleLongText = 'trunc') {
   let lines = [];
 
   if (handleLongText === 'trunc') {
-    lines = [genTruncatedText(text, PADDING_TEXT, BANNER_WIDTH)];
+    lines = [genTruncatedText(text, BANNER_WIDTH - (PADDING_TEXT.length * 2))];
   } else if (handleLongText === 'wrap') {
     lines = genWrappedLines(text, BANNER_WIDTH - (PADDING_TEXT.length * 2));
   }
@@ -53,14 +53,11 @@ function genWrappedLines(text, maxTextWidth) {
   return result;
 }
 
-function genTruncatedText(text, paddingText = '| ', maxBannerWidth) {
+function genTruncatedText(text, maxTextWidth) {
   const ELLIPSIS = '...';
-  if (text.length <= maxBannerWidth - (paddingText.length * 2)) return text;
-  if (ELLIPSIS.length + 1 < maxBannerWidth - (paddingText.length * 2)) {
-    return text.slice(
-      0,
-      maxBannerWidth - (paddingText.length * 2) - ELLIPSIS.length
-    ) + ELLIPSIS;
+  if (text.length <= maxTextWidth) return text;
+  if (ELLIPSIS.length + 1 < maxTextWidth) {
+    return text.slice(0, maxTextWidth - ELLIPSIS.length) + ELLIPSIS;
   }
   return '';
 }
