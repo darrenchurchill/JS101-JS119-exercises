@@ -12,12 +12,12 @@
  */
 
 function wordSizes(string) {
-  if (string.length === 0) return {};
-
   let result = {};
   let words = string.split(" ");
 
   words.forEach((word) => {
+    if (word.length === 0) return;
+
     if (result[word.length]) result[word.length] += 1;
     else result[word.length] = 1;
   });

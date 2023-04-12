@@ -42,6 +42,14 @@ describe("should return an object with the number of words of each size", () => 
     });
   });
 
+  it("Multiple consecutive spaces should not matter", () => {
+    expect(letterCounter.wordSizes("What's    up  doc?")).toEqual({
+      2: 1,
+      4: 1,
+      6: 1,
+    });
+  });
+
   it("Empty string", () => {
     expect(letterCounter.wordSizes("")).toEqual({});
   });
