@@ -51,4 +51,15 @@ describe("Converting an angle to degrees, minutes, and seconds", () => {
     expect(cuteAngles.dms(0.00001)).toBe(`0°00'00"`);
     expect(cuteAngles.dms(360)).toBe(`360°00'00"`);
   });
+
+  it("should calculate the correct result for negative values in [-360, 0]", () => {
+    expect(cuteAngles.dms(-76.73)).toBe(`-76°43'48"`);
+    expect(cuteAngles.dms(-254.6)).toBe(`-254°36'00"`);
+    expect(cuteAngles.dms(-93.034773)).toBe(`-93°02'05"`);
+    expect(cuteAngles.dms(-360)).toBe(`-360°00'00"`);
+  });
+
+  it("should return an unsigned zero string for an approximate negative zero", () => {
+    expect(cuteAngles.dms(-0.00001)).toBe(`0°00'00"`);
+  });
 });

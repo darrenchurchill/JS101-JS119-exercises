@@ -12,6 +12,9 @@
  */
 
 function dms(angle) {
+  let sign = angle >= 0 ? "" : "-";
+  angle = Math.abs(angle);
+
   let remainder = Math.round(angle * 60 * 60);  // current units: seconds
 
   let seconds = remainder % 60;
@@ -21,9 +24,10 @@ function dms(angle) {
   remainder = (remainder - minutes) / 60;  // current units: degrees
 
   let degrees = remainder;
+  if (degrees === 0 && minutes === 0 && seconds === 0) sign = "";
 
   return (
-    `${degrees}°` +
+    `${sign}${degrees}°` +
     `${`${minutes}`.padStart(2, "0")}'` +
     `${`${seconds}`.padStart(2, "0")}"`
   );
