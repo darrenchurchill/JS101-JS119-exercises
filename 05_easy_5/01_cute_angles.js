@@ -12,19 +12,15 @@
  */
 
 function dms(angle) {
-  let degrees = Math.floor(angle);
-  let minutes = (angle - degrees) * 60;
-  let seconds = Math.round((minutes - Math.floor(minutes)) * 60);
+  let remainder = Math.round(angle * 60 * 60);  // current units: seconds
 
-  minutes = Math.floor(minutes);
-  if (seconds === 60) {
-    seconds = 0;
-    minutes += 1;
-  }
-  if (minutes === 60) {
-    minutes = 0;
-    degrees += 1;
-  }
+  let seconds = remainder % 60;
+  remainder = (remainder - seconds) / 60;  // current units: minutes
+
+  let minutes = remainder % 60;
+  remainder = (remainder - minutes) / 60;  // current units: degrees
+
+  let degrees = remainder;
 
   return (
     `${degrees}°` +
