@@ -11,6 +11,13 @@
  *
  */
 
+/**
+ * Given a floating point angle, return a the angle's string representation in
+ * degrees, minutes, and seconds.
+ * @param {number} angle the angle to convert
+ * @returns {string} a string representation of the angle in degrees, minutes,
+ *                   and seconds.
+ */
 function dms(angle) {
   let sign = angle >= 0 ? "" : "-";
   angle = Math.abs(angle);
