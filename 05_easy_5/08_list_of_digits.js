@@ -19,16 +19,7 @@
  * @returns the array of digits
  */
 function digitList(integer) {
-  let result = [];
-  let remainder = integer;
-
-  do {
-    let digit = remainder % 10;
-    result.unshift(digit);
-    remainder = Math.floor(remainder / 10);
-  } while (remainder > 0);
-
-  return result;
+  return String(integer).split("").map((digit) => parseInt(digit, 10));
 }
 
 module.exports = {
