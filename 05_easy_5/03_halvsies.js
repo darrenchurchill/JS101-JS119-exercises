@@ -26,8 +26,7 @@
 function halvsies(array) {
   let result = [[], []];
 
-  let midIdx = Math.floor(array.length / 2);
-  if (array.length % 2 !== 0) midIdx += 1;
+  let midIdx = Math.ceil(array.length / 2);
 
   result[0] = array.slice(0, midIdx);
   result[1] = array.slice(midIdx);
