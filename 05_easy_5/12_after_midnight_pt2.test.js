@@ -29,6 +29,10 @@ describe("Converting a 24 hr string time to minutes after midnight", () => {
   it("Given 24:00, should return 0", () => {
     expect(afterMidnight.afterMidnight("24:00")).toBe(0);
   });
+
+  it("Given 24:01, should return 1", () => {
+    expect(afterMidnight.afterMidnight("24:01")).toBe(1);
+  });
 });
 
 describe("Converting a 24 hr string time to minutes before midnight", () => {
@@ -46,5 +50,9 @@ describe("Converting a 24 hr string time to minutes before midnight", () => {
 
   it("Given 24:00, should return 0", () => {
     expect(afterMidnight.beforeMidnight("24:00")).toBe(0);
+  });
+
+  it("Given 24:01, should return 1439", () => {
+    expect(afterMidnight.beforeMidnight("24:01")).toBe(1439);
   });
 });
