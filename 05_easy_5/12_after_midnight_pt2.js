@@ -23,9 +23,8 @@ const MIN_PER_DAY = HOURS_PER_DAY * MIN_PER_HOUR; // 1440
  * @returns the number of minutes after midnight
  */
 function afterMidnight(time) {
-  time = time.split(":").map((num) => Number(num));
-  let hours = time[0] % HOURS_PER_DAY;
-  let minutes = time[1];
+  let [hours, minutes] = time.split(":").map((num) => Number(num));
+  hours %= HOURS_PER_DAY;
 
   return (hours * MIN_PER_HOUR) + minutes;
 }
