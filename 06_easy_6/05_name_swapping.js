@@ -13,14 +13,19 @@
 
 
 /**
- * Given a string containing a name in the format of "firstName lastName",
- * return a string containing the name in the format of "lastName, firstName".
- * @param {String} name a name in the format of "firstName lastName"
- * @returns {String} the name in the format of "lastName, firstName"
+ * Given a string containing a name in the format of `"firstName [middleName(s)]
+ * lastName"`, return a string containing the name in the format of `"lastName,
+ * [middleName(s)] firstName"`.
+ * @param {String} name a name in the format of `"firstName [middleName(s)]
+ * lastName"`
+ * @returns {String} the name in the format of `"lastName, firstName
+ * [middleName(s)]"`
  */
 function swapName(name) {
-  name = name.trim();
-  return name.split(" ").filter((name) => name !== "").reverse().join(", ");
+  let split = name.trim().split(" ").filter((name) => name !== "");
+  if (split.length <= 1) return split.join(" ");
+
+  return `${split.at(-1)}, ${split.slice(0, -1).join(" ")}`;
 }
 
 module.exports = {

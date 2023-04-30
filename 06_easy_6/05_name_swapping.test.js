@@ -59,9 +59,39 @@ describe("Swapping a first and last name", () => {
   it("Should return a lastName, firstName when given a firstName lastName with multiple spaces", () => {
     expect(swapName.swapName("  Darren Churchill  ")).toBe("Churchill, Darren");
     expect(swapName.swapName(" Darren  Churchill  ")).toBe("Churchill, Darren");
-    expect(swapName.swapName("  Darren  Churchill  ")).toBe("Churchill, Darren");
+    expect(swapName.swapName("  Darren  Churchill  ")).toBe(
+      "Churchill, Darren"
+    );
     expect(swapName.swapName("  Darren  Churchill")).toBe("Churchill, Darren");
-    expect(swapName.swapName("  Darren    Churchill")).toBe("Churchill, Darren");
-    expect(swapName.swapName("  Darren Churchill   ")).toBe("Churchill, Darren");
+    expect(swapName.swapName("  Darren    Churchill")).toBe(
+      "Churchill, Darren"
+    );
+    expect(swapName.swapName("  Darren Churchill   ")).toBe(
+      "Churchill, Darren"
+    );
+  });
+});
+
+describe("Swapping a first, middle name(s), and last name", () => {
+  it("Should return a lastName, firstName middleName(s) when given a firstName middleName(s) lastName", () => {
+    expect(swapName.swapName("Karl Oskar Ragvals")).toBe("Ragvals, Karl Oskar");
+    expect(swapName.swapName("Karl Oskar Henriksson Ragvals")).toBe(
+      "Ragvals, Karl Oskar Henriksson"
+    );
+  });
+
+  it("Should return a lastName, firstName middleName(s) when given a firstName middleName(s) lastName with a additional space(s)", () => {
+    expect(swapName.swapName("Karl  Oskar  Ragvals")).toBe(
+      "Ragvals, Karl Oskar"
+    );
+    expect(swapName.swapName("Karl  Oskar  Henriksson  Ragvals")).toBe(
+      "Ragvals, Karl Oskar Henriksson"
+    );
+    expect(swapName.swapName("Karl Oskar  Henriksson  Ragvals")).toBe(
+      "Ragvals, Karl Oskar Henriksson"
+    );
+    expect(swapName.swapName("Karl  Oskar Henriksson  Ragvals")).toBe(
+      "Ragvals, Karl Oskar Henriksson"
+    );
   });
 });
