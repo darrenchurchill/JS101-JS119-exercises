@@ -22,11 +22,9 @@
  */
 function sequence(count, start) {
   let result = [];
-  let curValue = start;
 
-  for (let _ = 0; _ < count; _++) {
-    result.push(curValue);
-    curValue += start;
+  for (let curCount = 1; curCount <= count; curCount++) {
+    result.push(curCount * start);
   }
 
   return result;
