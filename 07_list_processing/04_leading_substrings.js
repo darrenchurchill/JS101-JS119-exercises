@@ -19,13 +19,7 @@
  * @returns {Array<String>} an array of `string`'s leading substrings
  */
 function leadingSubstrings(string) {
-  let result = [];
-
-  for (let i = 1; i <= string.length; i++) {
-    result.push(string.slice(0, i));
-  }
-
-  return result;
+  return string.split("").map((_, index) => string.slice(0, index + 1));
 }
 
 module.exports = {
