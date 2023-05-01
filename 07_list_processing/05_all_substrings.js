@@ -19,13 +19,9 @@ const leadingSubstrings = require("./04_leading_substrings");
  * @returns {Array<String>} an array of `string`'s substrings
  */
 function substrings(string) {
-  let result = [];
-
-  for (let i = 0; i < string.length; i++) {
-    result.push(...leadingSubstrings.leadingSubstrings(string.slice(i)));
-  }
-
-  return result;
+  return string.split("")
+    .map((_, index) => leadingSubstrings.leadingSubstrings(string.slice(index)))
+    .flat();
 }
 
 module.exports = {
