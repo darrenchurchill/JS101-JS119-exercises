@@ -20,7 +20,7 @@
  * uppercase
  */
 function isUppercase(string) {
-  return string.split("").every((char) => char === char.toUpperCase());
+  return string === string.toUpperCase();
 }
 
 module.exports = {
