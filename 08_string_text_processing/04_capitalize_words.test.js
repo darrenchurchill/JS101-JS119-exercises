@@ -1,3 +1,4 @@
+/* eslint-disable max-lines-per-function */
 /**
  * Darren Churchill
  *
@@ -27,6 +28,12 @@ describe("Capitalizing words in a sentence", () => {
     );
     expect(capitalizeWords.wordCap('this is a "quoted" word')).toBe(
       'This Is A "quoted" Word'
+    );
+  });
+
+  it("Should retain multiple consecutive spaces in result", () => {
+    expect(capitalizeWords.wordCap(" multiple   spaces")).toBe(
+      " Multiple   Spaces"
     );
   });
 });
