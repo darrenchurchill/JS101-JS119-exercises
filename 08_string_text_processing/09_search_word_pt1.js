@@ -30,5 +30,6 @@ function searchWord(word, text) {
 }
 
 module.exports = {
+  escapeRegExp,
   searchWord,
 };
