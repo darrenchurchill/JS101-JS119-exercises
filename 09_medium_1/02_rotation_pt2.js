@@ -21,12 +21,13 @@
  */
 function rotateRightmostDigits(number, count) {
   if (count < 1) throw new Error("`count` must be >= 1");
-  let digits = String(number).split("");
+  let sign = Math.sign(number);
+  let digits = String(Math.abs(number)).split("");
   if (count > digits.length) throw new Error("`count` must be < # of digits in `number`");
 
   digits.push(digits.splice(-count, 1));
 
-  return Number(digits.join(""));
+  return sign * Number(digits.join(""));
 }
 
 module.exports = {
