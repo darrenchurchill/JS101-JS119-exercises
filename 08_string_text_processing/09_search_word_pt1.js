@@ -22,7 +22,10 @@ function escapeRegExp(string) {
  * @param {String} text
  */
 function searchWord(word, text) {
-  let regex = new RegExp(`([^a-z]|\\b|^)${escapeRegExp(word)}([^a-z]|\\b|$)`, "gi");
+  let regex = new RegExp(
+    `(?<=^|\\b|[^a-z])${escapeRegExp(word)}(?=$|\\b|[^a-z])`,
+    "gi"
+  );
   return [...text.matchAll(regex)].length;
 }
 
