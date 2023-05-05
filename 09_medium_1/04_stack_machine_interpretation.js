@@ -18,32 +18,37 @@ const OPERATIONS = {
   },
 
   add: function(register, stack) {
-    register += stack.pop();
+    register += OPERATIONS._pop(stack);
     return [register, stack];
   },
 
   sub: function(register, stack) {
-    register -= stack.pop();
+    register -= OPERATIONS._pop(stack);
     return [register, stack];
   },
 
   mult: function(register, stack) {
-    register *= stack.pop();
+    register *= OPERATIONS._pop(stack);
     return [register, stack];
   },
 
   div: function(register, stack) {
-    register = Math.trunc(register / stack.pop());
+    register = Math.trunc(register / OPERATIONS._pop(stack));
     return [register, stack];
   },
 
   remainder: function(register, stack) {
-    register %= stack.pop();
+    register %= OPERATIONS._pop(stack);
     return [register, stack];
   },
 
+  _pop: function(stack) {
+    if (stack.length === 0) throw new Error("Empty stack!");
+    return stack.pop();
+  },
+
   pop: function(register, stack) {
-    register = stack.pop();
+    register = OPERATIONS._pop(stack);
     return [register, stack];
   },
 

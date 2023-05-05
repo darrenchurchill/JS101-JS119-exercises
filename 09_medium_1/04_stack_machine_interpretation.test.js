@@ -24,6 +24,15 @@ describe("Stack Machine command interpretation", () => {
     expect(() => stackMachineInterp.minilang("MOD")).toThrow();
   });
 
+  it("Should throw an error if the stack is empty when we need a stack value", () => {
+    expect(() => stackMachineInterp.minilang("ADD")).toThrow();
+    expect(() => stackMachineInterp.minilang("SUB")).toThrow();
+    expect(() => stackMachineInterp.minilang("MULT")).toThrow();
+    expect(() => stackMachineInterp.minilang("DIV")).toThrow();
+    expect(() => stackMachineInterp.minilang("REMAINDER")).toThrow();
+    expect(() => stackMachineInterp.minilang("POP")).toThrow();
+  });
+
   it("Should return an empty string if there are no PRINT commands", () => {
     expect(stackMachineInterp.minilang("5 PUSH 3 MULT")).toBe("");
     expect(stackMachineInterp.minilang("6 PUSH")).toBe("");
