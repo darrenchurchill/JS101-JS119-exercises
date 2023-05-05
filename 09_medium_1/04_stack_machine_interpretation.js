@@ -72,8 +72,10 @@ function minilang(commands) {
       result += `${register}`;
     } else if (Object.keys(OPERATIONS).includes(command)) {
       [register, stack] = OPERATIONS[command](register, stack);
-    } else {
+    } else if (!Number.isNaN(Number(command))) {
       [register, stack] = OPERATIONS.reg(register, stack, Number(command));
+    } else {
+      throw new Error(`Unknown command: ${command}`);
     }
   });
 

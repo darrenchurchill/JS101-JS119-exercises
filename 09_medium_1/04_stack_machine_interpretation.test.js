@@ -19,6 +19,11 @@ describe("Stack Machine command interpretation", () => {
     expect(stackMachineInterp.minilang("PRINT")).toBe("0");
   });
 
+  it("Should throw an error for unknown commands", () => {
+    expect(() => stackMachineInterp.minilang("HELLO")).toThrow();
+    expect(() => stackMachineInterp.minilang("MOD")).toThrow();
+  });
+
   it("Should return an empty string if there are no PRINT commands", () => {
     expect(stackMachineInterp.minilang("5 PUSH 3 MULT")).toBe("");
     expect(stackMachineInterp.minilang("6 PUSH")).toBe("");
