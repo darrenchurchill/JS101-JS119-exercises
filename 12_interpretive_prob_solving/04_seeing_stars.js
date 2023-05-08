@@ -40,13 +40,12 @@ function star(width) {
   let increment = 1;
 
   for (let idx = 0; idx < width; idx++) {
-    let row = new Array(width).fill(" ");
-    indexes.forEach((index) => (row[index] = starChar));
-
     if (idx === midIdx) {
       increment = -1;
       result.push(starChar.repeat(width));
     } else {
+      let row = new Array(width).fill(" ");
+      indexes.forEach((index) => (row[index] = starChar));
       result.push(row.join(""));
     }
 
