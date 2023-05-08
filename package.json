@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "fraction.js": "^4.2.0",
     "readline-sync": "^1.4.10"
   },
   "devDependencies": {
