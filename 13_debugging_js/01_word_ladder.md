@@ -39,3 +39,13 @@ it guesses incorrectly in this instance.
 
 The rest of the snippets' statements are also missing semicolons, but the
 interpreter handles those correctly if line 1 is terminated with a semicolon.
+
+Line 1's missing semicolon causes line 3's array to be parsed as:
+
+```js
+let ladder = ''['head', 'heal', 'teal', 'tell', 'tall', 'tail']...
+```
+
+This is using the bracket notation as to access an index of the empty string,
+which returns `undefined`. The `undefined` value doesn't have a `forEach`
+method, so the interpreter throws a `TypeError`.
