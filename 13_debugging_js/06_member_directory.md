@@ -1,0 +1,70 @@
+# Launch School Exercises: JS101-JS119 - Small Problems
+
+## Debugging JS: Member Directory
+
+<https://launchschool.com/exercises/f6207bd4>
+
+Caroline manages the member directory of her club and decided to implement a
+program she can use for doing that. Since the club is not very big, it's
+sufficient for her to keep the members' names and phone numbers in an object.
+Later she wants to add functionality that allows her to write this object to a
+file.
+
+One requirement Caroline takes very seriously is input validation. She intended
+for her code to strictly require that only alphabetic letters be included in the
+members' first and last names, separated by a space. But upon making a typo when
+entering the information of the newest member, she realizes that isn't the case.
+
+Figure out why not and fix the code so that it works as expected. You may also
+consider writing a few more test cases to ensure that the input validation
+requirement is properly met.
+
+```js
+let memberDirectory = {
+  'Jane Doe': '323-8293',
+  'Margaret Asbury': '989-1111',
+  'Callum Beech': '533-9090',
+  'Juanita Eastman': '424-1919',
+};
+
+function isValidName(name) {
+  return (/^\w+ \w+$/).test(name);
+}
+
+function isValidPhone(phone) {
+  return (/^\d{3}-\d{4}$/).test(phone);
+}
+
+function validMemberInfo(name, phone) {
+  return isValidName(name) && isValidPhone(phone);
+}
+
+function addMember(name, phone) {
+  if (validMemberInfo(name, phone)) {
+    memberDirectory[name] = phone;
+  } else {
+    console.log('Invalid member information.');
+  }
+}
+
+addMember('Laura Carlisle', '444-2223');
+addMember('Rachel Garcia', '232-1191');
+addMember('Earl 5mith', '331-9191');
+
+console.log(memberDirectory);
+```
+
+### Solution
+
+The `\w` token matches any word character, which can be `a-z`, `A-Z`,  `_`, and
+`0-9`. This is why the name `"Earl 5mith"` is considered valid in
+`isValidName`'s test.
+
+A simple fix would be to swap the `\w` tokens in `isValidName` with `[a-z]` and
+add the `i` ignore case option to the end of the `regex`.
+
+```js
+function isValidName(name) {
+  return (/^[a-z]+ [a-z]+$/i).test(name);
+}
+```
